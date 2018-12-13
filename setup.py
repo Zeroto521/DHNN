@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='dhnn',
-    version='0.1.2',
+    version='0.1.4',
     description='Discrete Hopfield Network (DHNN) implemented with Python',
     author='Zeroto521',
     author_email='Zeroto521@gmail.com',
