@@ -48,6 +48,12 @@ The network can strip off the sunglasses, because the network ready remembers th
 | :---------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
 |                                  [yosukekatada](https://github.com/yosukekatada)                                  |                                    [Zeroto521](https://github.com/Zeroto521)                                    |
 
+## TODO
+
+-   [ ] more flag, add 0/1 flag or other flag.
+-   [ ] optimize loop, try numba, Cpython or any other ways.
+-   [ ] optimize memory.
+
 ## License
 
 MIT License. [@yosukekatada](https://github.com/yosukekatada), [@Zeroto521](https://github.com/Zeroto521)

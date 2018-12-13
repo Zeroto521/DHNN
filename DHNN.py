@@ -3,46 +3,33 @@ import random
 
 import numpy as np
 
+
 """
     Discrete Hopfield Network (DHNN) implemented with Python.
 """
 
 
+# TODO:
+# 1. more flag, add 0/1 flag or other flag.
+# 1. optimize loop, try numba, Cpython or any other ways.
+# 1. optimize memory.
+
+
 class DHNN(object):
 
     def __init__(self, isload=False, wpath='weigh.npy'):
+        """Initializes DHNN.
+
+        Keyword Arguments:
+            isload {bool} -- is load local weight (default: {False})
+            wpath {str} -- the local weight path (default: {'weigh.npy'})
+        """
 
         self.wpath = wpath
         if isload and os.path.isfile(wpath):
-            print("Loading weight matrix....")
             self.weight = np.load(wpath)
         else:
             self.weight = None
-
-    def update(self, y, theta=0.5, epochs=100):
-        """Update test sample.
-
-        Arguments:
-            y {np.ndarray} -- vector
-
-        Keyword Arguments:
-            theta {float} -- the threshold of the neuron activation(default: {0.5})
-            epochs {int} -- the max iteration of loop(default: {100})
-
-        Returns:
-            np.ndarray -- recoveried sample
-        """
-
-        length = len(y)
-        for _ in range(epochs):
-            ind = random.randint(0, length-1)
-            u = np.dot(self.weight[ind], y) - theta
-            if u > 0:
-                y[ind] = 1
-            elif u < 0:
-                y[ind] = -1
-
-        return y
 
     def create_W(self, data):
         """Create network weight.
@@ -60,41 +47,43 @@ class DHNN(object):
 
         return weight
 
-    def train(self, data, save=True):
+    def train(self, data, issave=False):
         """Training pipeline.
 
         Arguments:
             data {list} -- each sample is vector
 
         Keyword Arguments:
-            save {bool} -- save weight or not (default: {True})
+            issave {bool} -- save weight or not (default: {True})
         """
 
         if self.weight is None:
-            print("Creating weight matrix....")
             self.weight = self.create_W(data)
-            print("Weight matrix is done!")
 
-            if save:
+            if issave:
                 np.save(self.wpath, self.weight)
 
-    def predict(self, data, epochs=1000, theta=0.5):
-        """Predicting pipline.
+    def predict(self, data, theta=0.5, epochs=1000):
+        """predict test sample.
 
         Arguments:
-            data {list} -- each sample is vector
+            data {np.ndarray} -- vector
 
         Keyword Arguments:
-            epochs {int} -- the max iteration of loop (default: {1000})
-            theta {float} -- the threshold of the neuron activation (default: {0.5})
+            theta {float} -- the threshold of the neuron activation(default: {0.5})
+            epochs {int} -- the max iteration of loop(default: {1000})
 
         Returns:
-            list -- recoveried by hopfield data 
+            np.ndarray -- recoveried sample
         """
 
-        recovery = []
-        for counter, y in enumerate(data):
-            print("The {}th sample is updating...".format(counter))
-            recovery.append(self.update(y=y, theta=theta, epochs=epochs))
+        length = len(data)
+        for _ in range(epochs):
+            ind = random.randint(0, length-1)
+            u = np.dot(self.weight[ind], data) - theta
+            if u > 0:
+                data[ind] = 1
+            elif u < 0:
+                data[ind] = -1
 
-        return recovery
+        return data
