@@ -1,10 +1,17 @@
-from distutils.core import setup
+import setuptools
 
-setup(
+from dhnn import __version__
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setuptools.setup(
     name='dhnn',
-    version='0.1.6',
+    version=__version__,
     description='Discrete Hopfield Network (DHNN) implemented with Python',
-    author='Zeroto521',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    author='yosukekatada,Zeroto521',
     author_email='Zeroto521@gmail.com',
     license="MIT",
     py_modules=['dhnn'],
@@ -12,6 +19,7 @@ setup(
     install_requires=['numpy', 'numba'],
     url='https://github.com/Zeroto521/DHNN',
     download_url='https://github.com/Zeroto521/DHNN/archive/master.zip',
+    python_requires=">=3",
     keywords=[
         'machine learning',
         'neural networks',

@@ -25,7 +25,8 @@ def main():
     # build network
     network = dhnn.DHNN()
     network.train(train_data)  # start training
-    recovery = [network.predict(i) for i in test_data]  # start testing
+    recovery = [network.predict(i, epochs=15000)
+                for i in test_data]  # start testing
 
     # recovery image
     for counter, img in enumerate(recovery):

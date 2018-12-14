@@ -1,8 +1,9 @@
 import os
-import random
 
 import numba as nb
 import numpy as np
+
+__version__ = '0.1.7'
 
 """
     Discrete Hopfield Network (DHNN) implemented with Python.
@@ -17,6 +18,7 @@ import numpy as np
 
 class DHNN(object):
 
+    @nb.autojit
     def __init__(self, isload=False, wpath='weigh.npy'):
         """Initializes DHNN.
 
@@ -31,7 +33,7 @@ class DHNN(object):
         else:
             self.weight = None
 
-    @nb.jit
+    @nb.autojit
     def create_W(self, data):
         """Create network weight.
 
@@ -48,7 +50,7 @@ class DHNN(object):
 
         return weight
 
-    @nb.jit
+    @nb.autojit
     def train(self, data, issave=False):
         """Training pipeline.
 
@@ -65,7 +67,7 @@ class DHNN(object):
             if issave:
                 np.save(self.wpath, self.weight)
 
-    @nb.jit
+    @nb.autojit
     def predict(self, data, theta=0.5, epochs=1000):
         """predict test sample.
 
@@ -80,13 +82,8 @@ class DHNN(object):
             np.ndarray -- recoveried sample
         """
 
-        length = len(data)
-        for _ in range(epochs):
-            ind = random.randint(0, length-1)
-            u = np.dot(self.weight[ind], data) - theta
-            if u > 0:
-                data[ind] = 1
-            elif u < 0:
-                data[ind] = -1
+        indexs = np.random.randint(0, len(data)-1, epochs)
+        for ind in indexs:
+            data[ind] = 1 if np.dot(self.weight[ind], data) - theta > 0 else -1
 
         return data
