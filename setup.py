@@ -20,6 +20,7 @@ setuptools.setup(
     url='https://github.com/Zeroto521/DHNN',
     download_url='https://github.com/Zeroto521/DHNN/archive/master.zip',
     python_requires=">=3",
+    package_data={"": ["*.jpg"]},
     keywords=[
         'machine learning',
         'neural networks',

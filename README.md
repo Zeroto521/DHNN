@@ -6,7 +6,7 @@ DHNN is a minimalistic and Numpy based implementation of the [Discrete Hopfield 
 
 Just use pip:
 
-    pip install minisom
+    pip install dhnn
 
 Or download `dhnn` to a directory which your choice and use `setup` to install script:
 
