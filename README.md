@@ -17,6 +17,7 @@ Or download `dhnn` to a directory which your choice and use `setup` to install s
 Prior to running this package, please install the following libraries.
 
 -   `numpy`
+-   `numba`
 
 ## Example (Image Restoration)
 
