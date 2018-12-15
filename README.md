@@ -2,6 +2,8 @@
 
 DHNN is a minimalistic and Numpy based implementation of the [Discrete Hopfield Network](http://en.wikipedia.org/wiki/Hopfield_network). DHNN can learn (memorize) patterns and remember (recover) the patterns when the network feeds those with noises.
 
+[![Build Status](https://travis-ci.com/Zeroto521/DHNN.svg?branch=master)](https://travis-ci.com/Zeroto521/DHNN) [![](https://img.shields.io/pypi/v/dhnn.svg)](https://pypi.org/project/dhnn/)
+
 ## Installation
 
 Just use pip:
