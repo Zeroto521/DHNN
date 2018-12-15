@@ -9,11 +9,16 @@ python:
     - "3.6"
     - "3.7"
     - "pypy"
-# command to install dependencies
+
+before_install:
+    - sudo apt-get update
+
 install:
-    - pip install numpy
-    - pip install numba
-    - pip install .
-# command to run tests
+    - pip install -r requirements.txt
+
+virtualenv:
+    system_site_packages: true
+
 script:
-    - examples/ImageRestoration
+    - cd examples
+    - python ImageRestoration.py
