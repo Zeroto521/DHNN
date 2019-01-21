@@ -1,10 +1,10 @@
-# python histroy codes
-.history/
+# vscode setting
+.history
+.vscode
 
 
 # python cache
-__pycache__/
-examples/__pycache__/
+__pycache__
 
 
 # model
