@@ -10,5 +10,9 @@ before_install:
 install: "pip install -r requirements.txt"
 
 script:
+    - curl -L https://github.com/Zeroto521/DHNN/archive/master.zip
+    - unzip master.zip
+    - cd master
+    - python setup.py install
     - cd examples
     - python ImageRestoration.py
