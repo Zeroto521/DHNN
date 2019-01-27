@@ -21,7 +21,7 @@ setuptools.setup(
     install_requires=[],
     url='https://github.com/Zeroto521/DHNN',
     download_url='https://github.com/Zeroto521/DHNN/archive/master.zip',
-    python_requires=">=3.5",
+    python_requires="2.7, 3.5, 3.6",
     package_data={"": ["assets/*.jpg"]},
     platforms=['linux', 'windows', 'macos'],
     keywords=[
