@@ -28,7 +28,6 @@ if __name__ == "__main__":
 
     print('[START] training.')
     model.train([train_data.flatten()])
-    print(train_data.flatten().shape)
     print('[END] training.')
 
     print('[START] predicting.')
