@@ -28,7 +28,7 @@ __license__ = 'MIT'
 __short_description__ = 'A Discrete Hopfield Neural Network Framework in python.'
 
 
-class DHNN():
+class DHNN(object):
 
     def __init__(self, isload=False, wpath='weigh.npy', pflag=1, nflag=-1):
         """Initializes DHNN.
