@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 import numpy as np
@@ -33,7 +35,7 @@ def readImg2array(file, size, threshold=145):
 
 
 def array2img(data, outFile=None):
-    """Convert Numpy array to Image file like '*.jpg'.
+    """Convert Numpy array to Image file like `*.jpg`.
 
     Arguments:
         data {np.ndarray} -- 1 or -1 matrix
@@ -53,21 +55,3 @@ def array2img(data, outFile=None):
         img.save(outFile)
 
     return img
-
-
-def preprocess(path, size, threshold):
-    """Generate data, read image from path and flatten it to vector.
-
-    Arguments:
-        path {str} -- the folder path
-
-    Returns:
-        list -- data list
-    """
-
-    paths = [os.path.join(path, p) for p in os.listdir(path)]
-    data_pics = [readImg2array(p, size=size, threshold=threshold)
-                 for p in paths]
-    data = [mat.flatten() for mat in data_pics]
-
-    return data
