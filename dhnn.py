@@ -36,6 +36,8 @@ class DHNN(object):
         Keyword Arguments:
             isload {bool} -- is load local weight (default: {False})
             wpath {str} -- the local weight path (default: {'weigh.npy'})
+            pflag {int} -- positive flag (default: 1)
+            nflag {int} -- negative flag (default: -1)
         """
 
         self.pflag = 1
@@ -72,6 +74,7 @@ class DHNN(object):
 
         Keyword Arguments:
             issave {bool} -- save weight or not (default: {True})
+            wpath {str} -- the local weight path (default: {'weigh.npy'})
         """
 
         if self.weight is None:
