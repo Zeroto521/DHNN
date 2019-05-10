@@ -1,10 +1,10 @@
-import os
+# -*- coding: utf-8 -*-
 
 import numpy as np
 from PIL import Image
 
 
-def readImg2array(file, size, threshold=145):
+def readImg2array(file, size, threshold=145, pflag=1, nflag=-1):
     """Read Image file and convert it to Numpy array.
 
     Arguments:
@@ -26,14 +26,14 @@ def readImg2array(file, size, threshold=145):
     imgArray = np.asarray(img)
     mat = np.zeros(img.size)
 
-    mat[imgArray > threshold] = 1
-    mat[imgArray <= threshold] = -1
+    mat[imgArray > threshold] = pflag
+    mat[imgArray <= threshold] = nflag
 
     return mat
 
 
-def array2img(data, outFile=None):
-    """Convert Numpy array to Image file like '*.jpg'.
+def array2img(data, outFile=None, pflag=1, nflag=-1):
+    """Convert Numpy array to Image file like `*.jpg`.
 
     Arguments:
         data {np.ndarray} -- 1 or -1 matrix
@@ -46,28 +46,10 @@ def array2img(data, outFile=None):
     """
 
     mat = np.zeros(data.shape, dtype=np.uint8)
-    mat[data == 1] = 255
-    mat[data == -1] = 0
+    mat[data == pflag] = 255
+    mat[data == nflag] = 0
     img = Image.fromarray(mat)
     if outFile is not None:
         img.save(outFile)
 
     return img
-
-
-def preprocess(path, size, threshold):
-    """Generate data, read image from path and flatten it to vector.
-
-    Arguments:
-        path {str} -- the folder path
-
-    Returns:
-        list -- data list
-    """
-
-    paths = [os.path.join(path, p) for p in os.listdir(path)]
-    data_pics = [readImg2array(p, size=size, threshold=threshold)
-                 for p in paths]
-    data = [mat.flatten() for mat in data_pics]
-
-    return data

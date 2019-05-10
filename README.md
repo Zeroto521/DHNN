@@ -12,11 +12,16 @@ DHNN is a minimalistic and Numpy based implementation of the [Discrete Hopfield 
 
 Just use pip:
 
-    pip install dhnn
+```bash
+pip install dhnn
+```
 
 Or download `dhnn` to a directory which your choice and use `setup` to install script:
 
-    python setup.py install
+```bash
+git clone https://github.com/Zeroto521/DHNN.git
+python setup.py install
+```
 
 ## Prerequisites
 
@@ -24,30 +29,6 @@ Prior to running this package, please install the following libraries.
 
 -   `numpy`
 -   `numba`
-
-## Example (Image Restoration)
-
-### Step1
-
-Input a neat picture like this(yosukekatada's smile face).
-
-![train](assets/yosuke.jpg)
-
-### Step2
-
-Get the network to memorize the pattern, this program will automatically transform RGB Jpg into black-white picture.
-
-### Step3
-
-After the network memorized it, put the picture with noise like this(yosukekatada's smile face with **sunglasses**) into the network.
-
-![test](assets/yosuke_test.jpg)
-
-### Step4
-
-The network can strip off the sunglasses, because the network ready remembers the former picture.
-
-![recovery](assets/recovery_0.jpg)
 
 ## Authors
 
@@ -57,7 +38,7 @@ The network can strip off the sunglasses, because the network ready remembers th
 
 ## TODO
 
--   [ ] more flag, add 0/1 flag or other flag.
+-   [x] more flag, add 0/1 flag or other flag.
 -   [x] optimize loop, try numba, Cpython or any other ways.
 -   [ ] optimize memory.
 

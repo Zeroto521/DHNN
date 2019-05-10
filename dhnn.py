@@ -1,25 +1,36 @@
+# -*- coding: utf-8 -*-
+
+"""
+DHNN
+=====
+A Discrete Hopfield Neural Network Framework in python.
+
+Example
+----------------------------
+    >>> from dhnn import DHNN
+    >>> model = dhnn.DHNN()  # build model
+    >>> model.train(train_data)  # Guess you have `train_data` which the shape is `(n, m)`. `n` is sample numbers, `m` is feature numbers and each sample must be vector.
+    >>> recovery = model.predict(test_data)  #  Guess you have `test_data` which the shape is `(m, 1)`.
+    >>> recovery
+
+Copyright Zeroto521
+----------------------------
+"""
+
 import os
 
 import numba as nb
 import numpy as np
 
-__version__ = '0.1.8'
 
-"""
-    Discrete Hopfield Network (DHNN) implemented with Python.
-"""
-
-
-# TODO:
-# 1. more flag, add 0/1 flag or other flag.
-# 1. optimize loop, try numba, Cpython or any other ways.
-# 1. optimize memory.
+__version__ = '0.1.9'
+__license__ = 'MIT'
+__short_description__ = 'A Discrete Hopfield Neural Network Framework in python.'
 
 
 class DHNN(object):
 
-    @nb.autojit
-    def __init__(self, isload=False, wpath='weigh.npy'):
+    def __init__(self, isload=False, wpath='weigh.npy', pflag=1, nflag=-1):
         """Initializes DHNN.
 
         Keyword Arguments:
@@ -27,7 +38,9 @@ class DHNN(object):
             wpath {str} -- the local weight path (default: {'weigh.npy'})
         """
 
-        self.wpath = wpath
+        self.pflag = 1
+        self.nflag = -1
+
         if isload and os.path.isfile(wpath):
             self.weight = np.load(wpath)
         else:
@@ -51,7 +64,7 @@ class DHNN(object):
         return weight
 
     @nb.autojit
-    def train(self, data, issave=False):
+    def train(self, data, issave=False, wpath='weigh.npy'):
         """Training pipeline.
 
         Arguments:
@@ -65,7 +78,7 @@ class DHNN(object):
             self.weight = self.create_W(data)
 
             if issave:
-                np.save(self.wpath, self.weight)
+                np.save(wpath, self.weight)
 
     @nb.autojit
     def predict(self, data, theta=0.5, epochs=1000):
@@ -84,6 +97,7 @@ class DHNN(object):
 
         indexs = np.random.randint(0, len(data)-1, epochs)
         for ind in indexs:
-            data[ind] = 1 if np.dot(self.weight[ind], data) - theta > 0 else -1
+            data[ind] = self.pflag if np.dot(
+                self.weight[ind], data) - theta > 0 else self.nflag
 
         return data
