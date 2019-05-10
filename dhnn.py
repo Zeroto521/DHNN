@@ -44,7 +44,7 @@ class DHNN(object):
         else:
             self.weight = None
 
-    @nb.jit
+    @nb.autojit
     def create_W(self, data):
         """Create network weight.
 
