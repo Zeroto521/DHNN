@@ -19,8 +19,8 @@ pip install dhnn
 Or download `dhnn` to a directory which your choice and use `setup` to install script:
 
 ```bash
-git clone https://github.com/Zeroto521/DHNN.git
-python setup.py install
+>>> git clone https://github.com/Zeroto521/DHNN.git
+>>> python setup.py install
 ```
 
 ## Prerequisites
