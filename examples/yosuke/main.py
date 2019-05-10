@@ -12,19 +12,23 @@ import utils
 cwd_path = os.path.split(os.path.abspath(__file__))[0]
 threshold = 60
 size = (100, 100)
+pflag = 1
+nflag = -1
 
 
 if __name__ == "__main__":
     # create a list of train data.
     train_path = os.path.join(cwd_path, 'data/yosuke.jpg')
-    train_data = utils.readImg2array(train_path, size, threshold)
+    train_data = utils.readImg2array(
+        train_path, size, threshold, pflag=pflag, nflag=nflag)
 
     # create a list of tese data, e.g. yosukekatada 's sunglasses picture.
     test_path = os.path.join(cwd_path, 'data/sunglasses.jpg')
-    test_data = utils.readImg2array(test_path, size, threshold)
+    test_data = utils.readImg2array(
+        test_path, size, threshold, pflag=pflag, nflag=nflag)
 
     # build model
-    model = dhnn.DHNN()
+    model = dhnn.DHNN(pflag=pflag, nflag=nflag)
 
     print('[START] training.')
     model.train([train_data.flatten()])
@@ -37,5 +41,5 @@ if __name__ == "__main__":
     print('[START] predicting.')
     recovery = recovery.reshape(size)
     outfile = os.path.join(cwd_path, 'data', 'recovery.jpg')
-    utils.array2img(recovery, outFile=outfile)
+    utils.array2img(recovery, outFile=outfile, pflag=pflag, nflag=nflag)
     print('[END] saving.')

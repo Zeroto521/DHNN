@@ -28,9 +28,9 @@ __license__ = 'MIT'
 __short_description__ = 'A Discrete Hopfield Neural Network Framework in python.'
 
 
-class DHNN(object):
+class DHNN():
 
-    def __init__(self, isload=False, wpath='weigh.npy'):
+    def __init__(self, isload=False, wpath='weigh.npy', pflag=1, nflag=-1):
         """Initializes DHNN.
 
         Keyword Arguments:
@@ -38,7 +38,9 @@ class DHNN(object):
             wpath {str} -- the local weight path (default: {'weigh.npy'})
         """
 
-        self.wpath = wpath
+        self.pflag = 1
+        self.nflag = -1
+
         if isload and os.path.isfile(wpath):
             self.weight = np.load(wpath)
         else:
@@ -62,7 +64,7 @@ class DHNN(object):
         return weight
 
     @nb.autojit
-    def train(self, data, issave=False):
+    def train(self, data, issave=False, wpath='weigh.npy'):
         """Training pipeline.
 
         Arguments:
@@ -76,7 +78,7 @@ class DHNN(object):
             self.weight = self.create_W(data)
 
             if issave:
-                np.save(self.wpath, self.weight)
+                np.save(wpath, self.weight)
 
     @nb.autojit
     def predict(self, data, theta=0.5, epochs=1000):
@@ -95,6 +97,7 @@ class DHNN(object):
 
         indexs = np.random.randint(0, len(data)-1, epochs)
         for ind in indexs:
-            data[ind] = 1 if np.dot(self.weight[ind], data) - theta > 0 else -1
+            data[ind] = self.pflag if np.dot(
+                self.weight[ind], data) - theta > 0 else self.nflag
 
         return data
