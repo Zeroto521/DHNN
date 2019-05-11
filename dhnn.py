@@ -66,7 +66,7 @@ class DHNN(object):
 
         mat = np.vstack(data)
         eye = len(data) * np.identity(np.size(mat, 1))
-        self._w = mat.T @ mat - eye
+        self._w = np.dot(mat.T, mat) - eye
 
         if issave:
             np.save(wpath, self.weight)
