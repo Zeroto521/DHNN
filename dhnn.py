@@ -86,6 +86,7 @@ class DHNN(object):
             np.ndarray -- recoveried sample
         """
 
+        # TODO: accelerate mulity-data predict by matrix dot method
         indexs = np.random.randint(0, len(data) - 1, epochs)
         for ind in indexs:
             vec = self._w[ind]
