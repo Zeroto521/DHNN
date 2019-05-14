@@ -10,18 +10,15 @@ Example
     >>> from dhnn import DHNN
     >>> model = dhnn.DHNN()  # build model
     >>> model.train(train_data)  # Guess you have `train_data` which the shape is `(n, m)`. `n` is sample numbers, `m` is feature numbers and each sample must be vector.
-    >>> recovery = model.predict(test_data)  #  Guess you have `test_data` which the shape is `(m, 1)`.
+    >>> recovery = model.predict(test_data)  #  Guess you have `test_data` which the shape is `(n, m)`. `n` and `m` is same means to train_data's shape.
     >>> recovery
 
 Copyright Zeroto521
 ----------------------------
 """
 
-import os
 
-import numba as nb
 import numpy as np
-
 
 __version__ = '0.1.11'
 __license__ = 'MIT'
@@ -43,8 +40,10 @@ class DHNN(object):
         self.pflag = pflag
         self.nflag = nflag
 
-        if isload and os.path.isfile(wpath):
-            self._w = np.load(wpath)
+        if isload:
+            from os.path import isfile
+            if isfile(wpath):
+                self._w = np.load(wpath)
         else:
             self._w = None
 
@@ -52,7 +51,6 @@ class DHNN(object):
     def weight(self):
         return self._w
 
-    @nb.autojit
     def train(self, data, issave=False, wpath='weigh.npy'):
         """Training pipeline.
 
@@ -71,9 +69,8 @@ class DHNN(object):
         if issave:
             np.save(wpath, self.weight)
 
-    @nb.autojit
     def predict(self, data, theta=0.5, epochs=1000):
-        """predict test sample.
+        """predict sample.
 
         Arguments:
             data {np.ndarray} -- vector
@@ -86,11 +83,18 @@ class DHNN(object):
             np.ndarray -- recoveried sample
         """
 
-        # TODO: accelerate mulity-data predict by matrix dot method
-        indexs = np.random.randint(0, len(data) - 1, epochs)
+        if isinstance(data, list):
+            data = np.asarray(data)
+            print(data.shape)
+
+        indexs = np.random.randint(0, len(self._w) - 1, (epochs, len(data)))
         for ind in indexs:
-            vec = self._w[ind]
-            value = vec.dot(data)
-            data[ind] = self.pflag if (value - theta > 0) else self.nflag
+            diagonal = np.diagonal(np.dot(self._w[ind], data.T))
+            diagonal = np.expand_dims(diagonal, -1)
+            value = np.apply_along_axis(
+                lambda x: self.pflag if x > theta else self.nflag, 1, diagonal)
+
+            for i in range(len(data)):
+                data[i, ind[i]] = value[i]
 
         return data

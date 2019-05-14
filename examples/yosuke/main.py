@@ -35,11 +35,11 @@ if __name__ == "__main__":
     print('[END] training.')
 
     print('[START] predicting.')
-    recovery = model.predict(test_data.flatten(), epochs=50000)
+    recovery = model.predict([test_data.flatten()], epochs=50000)
     print('[END] predicting.')
 
     print('[START] predicting.')
-    recovery = recovery.reshape(size)
+    recovery = recovery[0].reshape(size)
     outfile = os.path.join(cwd_path, 'data', 'recovery.jpg')
     utils.array2img(recovery, outFile=outfile, pflag=pflag, nflag=nflag)
     print('[END] saving.')

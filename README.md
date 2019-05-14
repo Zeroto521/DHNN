@@ -39,7 +39,7 @@ Prior to running this package, please install the following libraries.
 ## TODO
 
 -   [x] more flag, add 0/1 flag or other flag.
--   [x] optimize loop, try numba, Cpython or any other ways.
+-   [ ] optimize loop, try numba, Cpython or any other ways.
 -   [ ] optimize memory.
 
 ## License
