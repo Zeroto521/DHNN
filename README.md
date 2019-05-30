@@ -2,7 +2,7 @@
 
 A **D**iscrete **H**opfield **N**eural **N**etwork Framework in python.
 
-[![Build Status](https://travis-ci.com/Zeroto521/DHNN.svg?branch=master)](https://travis-ci.com/Zeroto521/DHNN) [![codecov](https://codecov.io/gh/Zeroto521/dhnn/branch/master/graph/badge.svg)](https://codecov.io/gh/Zeroto521/dhnn) [![](https://img.shields.io/pypi/v/dhnn.svg)](https://pypi.org/project/dhnn/)
+[![Build Status](https://travis-ci.com/Zeroto521/DHNN.svg?branch=master)](https://travis-ci.com/Zeroto521/DHNN) [![codecov](https://codecov.io/gh/Zeroto521/dhnn/branch/master/graph/badge.svg)](https://codecov.io/gh/Zeroto521/dhnn) [![](https://img.shields.io/pypi/v/dhnn.svg)](https://pypi.org/project/dhnn/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.org/project/dhnn/)
 
 ## Introduction
 
@@ -22,13 +22,6 @@ Or download `dhnn` to a directory which your choice and use `setup` to install s
 >>> git clone https://github.com/Zeroto521/DHNN.git
 >>> python setup.py install
 ```
-
-## Prerequisites
-
-Prior to running this package, please install the following libraries.
-
--   `numpy`
--   `numba`
 
 ## Authors
 

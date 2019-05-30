@@ -20,7 +20,7 @@ Copyright Zeroto521
 
 import numpy as np
 
-__version__ = '0.1.11'
+__version__ = '0.1.12'
 __license__ = 'MIT'
 __short_description__ = 'A Discrete Hopfield Neural Network Framework in python.'
 
