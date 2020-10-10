@@ -2,7 +2,7 @@
 
 A **D**iscrete **H**opfield **N**eural **N**etwork Framework in python.
 
-[![Build Status](https://travis-ci.com/Zeroto521/DHNN.svg?branch=master)](https://travis-ci.com/Zeroto521/DHNN) [![codecov](https://codecov.io/gh/Zeroto521/dhnn/branch/master/graph/badge.svg)](https://codecov.io/gh/Zeroto521/dhnn) [![](https://img.shields.io/pypi/v/dhnn.svg)](https://pypi.org/project/dhnn/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.org/project/dhnn/)
+[![Build Status](https://travis-ci.com/Zeroto521/DHNN.svg?branch=master)](https://travis-ci.com/Zeroto521/DHNN) [![codecov](https://codecov.io/gh/Zeroto521/dhnn/branch/master/graph/badge.svg)](https://codecov.io/gh/Zeroto521/dhnn) [![](https://img.shields.io/pypi/v/dhnn.svg)](https://pypi.org/project/dhnn/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.org/project/dhnn/) [![Downloads](https://pepy.tech/badge/dhnn)](https://pepy.tech/project/dhnn)
 
 ## Introduction
 
